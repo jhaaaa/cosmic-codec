@@ -63,11 +63,13 @@ python3 solar_lattice.py
 Standalone daily message generator. Scores all solar wind channels for a given day, picks the most word-rich, collects those words in the order they arrived, and generates an AI-written message using them as a spine.
 
 ```
-python3 cosmic_message.py
+python3 cosmic_message.py --date 2017-08-01
 python3 cosmic_message.py --date 2017-08-01 --tone meaningful --persona oracle
-python3 cosmic_message.py --tone dada --persona ghost
-python3 cosmic_message.py --persona "You are a grieving astronomer."
+python3 cosmic_message.py --date 2017-08-01 --tone dada --persona ghost
+python3 cosmic_message.py --date 2017-08-01 --persona "You are a grieving astronomer."
 ```
+
+Note: uses NASA CDAWeb OMNI data which has a ~2 week lag. Always pass `--date` with a date at least two weeks in the past.
 
 **Tone options:** `meaningful` · `realistic` · `scifi` · `dada`
 
@@ -129,7 +131,7 @@ All data is fetched from public APIs with no key required.
 
 **Cosmic rays** — NOAA SWPC GOES, `goes/primary/integral-protons-1-day.json`. High-energy channels (≥100 MeV, ≥500 MeV) are dominated by galactic cosmic rays during quiet solar conditions. Updated every 5 minutes. If NMDB (Neutron Monitor Database, Jungfraujoch) is accessible, it provides true ground-level cosmic ray counts instead.
 
-**AI message generation** — Google Gemini API (`gemini-2.0-flash`). Requires `GEMINI_API_KEY`. Free tier available at [aistudio.google.com](https://aistudio.google.com).
+**AI message generation** — Google Gemini API (`gemini-2.5-flash`). Requires `GEMINI_API_KEY`. Free tier available at [aistudio.google.com](https://aistudio.google.com).
 
 ---
 
@@ -148,7 +150,7 @@ COSMIC RAYS   KOA · LAI · HEI · NAN · FAG · ECHO · OKI · JAG · LAN ...
 ## Installation
 
 ```
-pip install requests anthropic
+pip install requests google-genai
 python3 solar_system.py
 python3 solar_system.py --message --tone meaningful
 ```
